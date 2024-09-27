@@ -1,0 +1,16 @@
+services:
+  chat-agent:
+    build: .
+    ports:
+      - "5491:5491"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+    networks:
+      - website_poc_app-network
+    command: gunicorn --config gunicorn.conf.py main:app
+
+networks:
+  website_poc_app-network:
+    external: true
